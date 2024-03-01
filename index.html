@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quote Generator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #2E3440; /* Nord dark theme background color */
+      color: #E5E9F0; /* Nord dark theme text color */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #quote {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="quote-container">
+    <div id="quote"></div>
+  </div>
+
+  <script>
+    // Function to fetch quotes from JSON file
+    async function fetchQuotes() {
+      const response = await fetch('quotes.json');
+      const data = await response.json();
+      return data;
+    }
+
+    // Function to generate a random quote
+    async function generateQuote() {
+      const quotes = await fetchQuotes();
+      const randomNumber = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quote').innerText = quotes[randomNumber];
+    }
+
+    // Call the function when the page loads
+    generateQuote();
+  </script>
+</body>
+</html>
